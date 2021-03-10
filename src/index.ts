@@ -30,7 +30,7 @@ interface LogOptions {
     errorHandler?: { (err: Error): void }; 
 }
 
-export default class DiscordConsoleLogger {
+export class DiscordConsoleLogger {
     private hook: string
     private icon: string | undefined = undefined;
     private footer: string | undefined = undefined;
