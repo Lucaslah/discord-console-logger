@@ -2,7 +2,7 @@
 <p>Discord Console Logger</p>
 </h1>
 <p align="center">
-  A Basic Nodejs logger that logs to Discord
+  A Basic Nodejs logger that logs to a Discord Webhook
   </p>
 <p align="center">
   <img alt="npm" src="https://img.shields.io/npm/v/discord-console-logger">
