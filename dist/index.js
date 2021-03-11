@@ -22,6 +22,7 @@ class DiscordConsoleLogger {
         this.id = undefined;
         this.token = undefined;
         this.console = false;
+        this.consoleError = false;
         this.onErrorCallback = undefined;
         this.logInternalError = (err) => {
             if (this.onErrorCallback) {
@@ -103,6 +104,9 @@ class DiscordConsoleLogger {
             this.log('error', data);
             if (this.console) {
                 color_1.error(data.message);
+                if (this.consoleError) {
+                    console.error(data.error);
+                }
             }
         };
         /**
@@ -145,6 +149,7 @@ class DiscordConsoleLogger {
         this.icon = options.icon;
         this.footer = options.footer;
         this.console = options.console;
+        this.consoleError = options.consoleError;
         this.onErrorCallback = options.errorHandler;
         this.getToken();
     }

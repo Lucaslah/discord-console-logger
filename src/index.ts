@@ -29,6 +29,7 @@ interface LogOptions {
     icon?: string
     footer?: string
     console?: boolean
+    consoleError?: boolean
     errorHandler?: { (err: Error): void }; 
 }
 
@@ -39,6 +40,7 @@ export class DiscordConsoleLogger {
     private id: string | undefined = undefined;
     private token: string | undefined = undefined;
     private console: boolean | undefined = false;
+    private consoleError: boolean | undefined = false
     private onErrorCallback: ErrorCallback | undefined = undefined;
 
      /**
@@ -50,6 +52,7 @@ export class DiscordConsoleLogger {
     this.icon = options.icon;
     this.footer = options.footer;
     this.console = options.console;
+    this.consoleError = options.consoleError
     this.onErrorCallback = options.errorHandler;
     this.getToken()
   }
@@ -146,6 +149,9 @@ export class DiscordConsoleLogger {
       this.log('error', data);
       if (this.console) {
         error(data.message)
+        if (this.consoleError) {
+            console.error(data.error)
+        }
     }
 }
 

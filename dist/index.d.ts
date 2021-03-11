@@ -10,6 +10,7 @@ interface LogOptions {
     icon?: string;
     footer?: string;
     console?: boolean;
+    consoleError?: boolean;
     errorHandler?: {
         (err: Error): void;
     };
@@ -21,6 +22,7 @@ export declare class DiscordConsoleLogger {
     private id;
     private token;
     private console;
+    private consoleError;
     private onErrorCallback;
     /**
   * @param options Discord logger options
