@@ -1,6 +1,6 @@
 {
     "name": "discord-console-logger",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "main": "dist/index.js",
     "repository": "https://github.com/Lucaslah/discord-console-logger.git",
     "author": "Lucaslah <lucas.petrino@spycampllc.ml>",
