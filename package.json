@@ -22,6 +22,8 @@
         "typescript": "3.8.3"
     },
     "dependencies": {
+        "chalk": "^4.1.0",
+        "dayjs": "^1.10.4",
         "superagent": "5.2.2"
     }
 }

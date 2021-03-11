@@ -1,4 +1,5 @@
 import request from "superagent"
+import { info, debug, warn, error, verbose } from "./color"
 
 const COLORS: { [key: string]: number } = {
 
@@ -27,6 +28,7 @@ interface LogOptions {
     hookURL: string
     icon?: string
     footer?: string
+    console?: boolean
     errorHandler?: { (err: Error): void }; 
 }
 
@@ -36,6 +38,7 @@ export class DiscordConsoleLogger {
     private footer: string | undefined = undefined;
     private id: string | undefined = undefined;
     private token: string | undefined = undefined;
+    private console: boolean;
     private onErrorCallback: ErrorCallback | undefined = undefined;
 
      /**
@@ -46,6 +49,7 @@ export class DiscordConsoleLogger {
     this.hook = options.hookURL;
     this.icon = options.icon;
     this.footer = options.footer;
+    this.console = options.console;
     this.onErrorCallback = options.errorHandler;
     this.getToken()
   }
@@ -138,26 +142,51 @@ export class DiscordConsoleLogger {
   /**
    * @param data Log message data
    */
-  public error = async (data: LogMsg) => this.log('error', data);
+  public error = async (data: LogMsg) => {
+      this.log('error', data);
+      if (this.console) {
+        error(data.message)
+    }
+}
 
   /**
    * @param data Log message data
    */
-  public warn = async (data: LogMsg) => this.log('warn', data);
+  public warn = async (data: LogMsg) => { 
+      this.log('warn', data);
+      if (this.console) {
+        warn(data.message)
+      }
+  }
 
   /**
    * @param data Log message data
    */
-  public info = async (data: LogMsg) => this.log('info', data);
+  public info = async (data: LogMsg) => {
+      this.log('info', data);
+      if (this.console) {
+        info(data.message)
+    }
+  }
 
   /**
    * @param data Log message data
    */
-  public verbose = async (data: LogMsg) => this.log('verbose', data);
+  public verbose = async (data: LogMsg) => {
+      this.log('verbose', data);
+      if (this.console) {
+        verbose(data.message)
+    }
+}
 
   /**
    * @param data Log message data
    */
-  public debug = async (data: LogMsg) => this.log('debug', data);
+  public debug = async (data: LogMsg) => { 
+      this.log('debug', data);
+      if (this.console) {
+       debug(data.message)
+    } 
+  }
 
 }

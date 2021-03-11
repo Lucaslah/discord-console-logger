@@ -1,18 +1,10 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const superagent_1 = __importDefault(require("superagent"));
+const color_1 = require("./color");
 const COLORS = {
     error: 14362664,
     warn: 16497928,
@@ -22,7 +14,6 @@ const COLORS = {
 };
 class DiscordConsoleLogger {
     /**
-  * Create a discord console logger instance
   * @param options Discord logger options
   */
     constructor(options) {
@@ -36,13 +27,13 @@ class DiscordConsoleLogger {
                 this.onErrorCallback(err);
             }
             else {
-                console.error(err); // eslint-disable-line
+                console.error(err);
             }
         };
-        this.getToken = () => __awaiter(this, void 0, void 0, function* () {
+        this.getToken = async () => {
             if (!this.id || !this.token) {
                 try {
-                    const response = yield superagent_1.default
+                    const response = await superagent_1.default
                         .get(this.hook)
                         .set('accept', 'json');
                     this.id = response.body.id;
@@ -56,17 +47,16 @@ class DiscordConsoleLogger {
                 id: this.id || '',
                 token: this.token || ''
             };
-        });
-        this.getUrl = () => __awaiter(this, void 0, void 0, function* () {
-            const { id, token } = yield this.getToken();
+        };
+        this.getUrl = async () => {
+            const { id, token } = await this.getToken();
             return `https://discord.com/api/webhooks/${id}/${token}`;
-        });
+        };
         /**
-         * Send a log message to discord
          * @param level Message log level
          * @param data Log message data
          */
-        this.log = (level, data) => __awaiter(this, void 0, void 0, function* () {
+        this.log = async (level, data) => {
             try {
                 const postBody = {
                     content: undefined,
@@ -93,10 +83,10 @@ class DiscordConsoleLogger {
                     postBody.content = `\`\`\`${contentStrings.join('\n\n')}\`\`\``;
                 }
                 const options = {
-                    url: yield this.getUrl(),
+                    url: await this.getUrl(),
                     body: postBody
                 };
-                yield superagent_1.default
+                await superagent_1.default
                     .post(options.url)
                     .send(options.body)
                     .set('accept', 'json');
@@ -104,33 +94,58 @@ class DiscordConsoleLogger {
             catch (err) {
                 this.logInternalError(err);
             }
-        });
+        };
         /**
          * @param data Log message data
          */
-        this.error = (data) => __awaiter(this, void 0, void 0, function* () { return this.log('error', data); });
+        this.error = async (data) => {
+            this.log('error', data);
+            if (this.console) {
+                color_1.error(data.message);
+            }
+        };
         /**
          * @param data Log message data
          */
-        this.warn = (data) => __awaiter(this, void 0, void 0, function* () { return this.log('warn', data); });
+        this.warn = async (data) => {
+            this.log('warn', data);
+            if (this.console) {
+                color_1.warn(data.message);
+            }
+        };
         /**
          * @param data Log message data
          */
-        this.info = (data) => __awaiter(this, void 0, void 0, function* () { return this.log('info', data); });
+        this.info = async (data) => {
+            this.log('info', data);
+            if (this.console) {
+                color_1.info(data.message);
+            }
+        };
         /**
          * @param data Log message data
          */
-        this.verbose = (data) => __awaiter(this, void 0, void 0, function* () { return this.log('verbose', data); });
+        this.verbose = async (data) => {
+            this.log('verbose', data);
+            if (this.console) {
+                color_1.verbose(data.message);
+            }
+        };
         /**
          * @param data Log message data
          */
-        this.debug = (data) => __awaiter(this, void 0, void 0, function* () { return this.log('debug', data); });
+        this.debug = async (data) => {
+            this.log('debug', data);
+            if (this.console) {
+                color_1.debug(data.message);
+            }
+        };
         this.hook = options.hookURL;
         this.icon = options.icon;
         this.footer = options.footer;
+        this.console = options.console;
         this.onErrorCallback = options.errorHandler;
         this.getToken();
     }
 }
-exports.default = DiscordConsoleLogger;
-//# sourceMappingURL=index.js.map
+exports.DiscordConsoleLogger = DiscordConsoleLogger;
