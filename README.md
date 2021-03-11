@@ -33,7 +33,7 @@ const logger = new DiscordConsoleLogger({
     icon: '', 
 // Footer Text to show on the embed (optional)
     footer: '', 
-// Sets if you want discord-console-logger to log to the console as well as your Discord Webhook (required)
+// Sets if you want discord-console-logger to log to the console as well as your Discord Webhook (optional: default false)
     console: true, 
 // Error Handler (optional)
     errorHandler: err => {

@@ -38,7 +38,7 @@ export class DiscordConsoleLogger {
     private footer: string | undefined = undefined;
     private id: string | undefined = undefined;
     private token: string | undefined = undefined;
-    private console: boolean;
+    private console: boolean | undefined = false;
     private onErrorCallback: ErrorCallback | undefined = undefined;
 
      /**

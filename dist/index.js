@@ -21,6 +21,7 @@ class DiscordConsoleLogger {
         this.footer = undefined;
         this.id = undefined;
         this.token = undefined;
+        this.console = false;
         this.onErrorCallback = undefined;
         this.logInternalError = (err) => {
             if (this.onErrorCallback) {
