@@ -80,4 +80,10 @@ logger.info({
 ---
 
 ## Logger Instance Data
-TBA
+| Field        | Type    | Description                                                                                   | Required | Default |
+|--------------|---------|-----------------------------------------------------------------------------------------------|----------|---------|
+| hookURL      | string  | Full Discord Webhook URL with ID and Token                                                    | true     | null    |
+| icon         | string  | Icon to Show in the embed footer                                                              | false    | null    |
+| footer       | string  | Footer Text to show on the embed                                                              | false    | null    |
+| console      | boolean | Sets if you want discord-console-logger to log to the console as well as your Discord Webhook | false    | false   |
+| errorHandler | error   | Error Handler                                                                                 | false    | null    |
