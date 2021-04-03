@@ -70,7 +70,7 @@ logger.info({
 })
 ```
 
-## Log Message 
+## Log Message Data
 | Field  | Type  | Description  | Required |
 |---|---|---|---|
 | message  | string  | Main log message (Embed Title)   |  yes  |
@@ -78,3 +78,6 @@ logger.info({
 | error  |  Error  | Error to be logged with the log embed  | no  |
 | json  |  any | Json that will be logged with the Discord Embed  | no  |
 ---
+
+## Logger Instance Data
+TBA
