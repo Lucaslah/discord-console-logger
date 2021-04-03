@@ -37,7 +37,7 @@ const logger = new DiscordConsoleLogger({
     console: true, 
 // Error Handler (optional)
     errorHandler: err => {
-        console.error('[Discord-Console-Logger] ', err); 
+        console.error('[DISCORD CONSOLE LOGGER]', err); 
     }
 })
 
@@ -53,20 +53,20 @@ logger.debug({ message: "Testing" }) // Log Debug
 
 // Log Error
 logger.error({
-message: 'Testing',
-error: new Error('Testing')
+  message: 'Testing',
+  error: new Error('Testing')
 })
 
 // Log Json
 logger.debug({
-message: 'Testing',
-json: { test: testing }
+  message: 'Testing',
+  json: { test: testing }
 })
 
 // Log with a Description
 logger.info({
-message: 'Testing',
-description: 'More Testing'
+  message: 'Testing',
+  description: 'More Testing'
 })
 ```
 
