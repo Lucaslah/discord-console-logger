@@ -7,7 +7,7 @@ interface LogMsg {
 }
 interface LogOptions {
     hookURL: string;
-    icon?: string;
+    iconURL?: string;
     footer?: string;
     console?: boolean;
     consoleError?: boolean;
@@ -25,14 +25,14 @@ export declare class DiscordConsoleLogger {
     private consoleError;
     private onErrorCallback;
     /**
-  * @param options Discord logger options
-  */
+    * @param options Discord logger options
+    */
     constructor(options: LogOptions);
     private logInternalError;
     private getToken;
     private getUrl;
     /**
-     * @param level Message log level
+     * @param level Log Level
      * @param data Log message data
      */
     log: (level: Log_Levels, data: LogMsg) => Promise<void>;

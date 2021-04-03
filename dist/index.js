@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DiscordConsoleLogger = void 0;
 const superagent_1 = __importDefault(require("superagent"));
 const color_1 = require("./color");
 const COLORS = {
@@ -14,8 +15,8 @@ const COLORS = {
 };
 class DiscordConsoleLogger {
     /**
-  * @param options Discord logger options
-  */
+    * @param options Discord logger options
+    */
     constructor(options) {
         this.icon = undefined;
         this.footer = undefined;
@@ -55,21 +56,48 @@ class DiscordConsoleLogger {
             return `https://discord.com/api/webhooks/${id}/${token}`;
         };
         /**
-         * @param level Message log level
+         * @param level Log Level
          * @param data Log message data
          */
         this.log = async (level, data) => {
             try {
                 const postBody = {
                     content: undefined,
+                    /**
+                     * Embed Data
+                     */
                     embeds: [{
+                            /**
+                            * Embed Title
+                            */
                             title: data.message,
+                            /**
+                            * Embed description
+                            */
                             description: data.description,
+                            /**
+                            * Embed Color
+                            */
                             color: COLORS[level],
+                            /**
+                            * Embed fields
+                            */
                             fields: [],
+                            /**
+                            * Embed Timestamp
+                            */
                             timestamp: new Date().toISOString(),
+                            /**
+                            * Embed footer
+                            */
                             footer: {
+                                /**
+                                * Embed footer text
+                                */
                                 text: this.footer,
+                                /**
+                                * Embed footer Icon
+                                */
                                 icon_url: this.icon
                             }
                         }]
@@ -146,7 +174,7 @@ class DiscordConsoleLogger {
             }
         };
         this.hook = options.hookURL;
-        this.icon = options.icon;
+        this.icon = options.iconURL;
         this.footer = options.footer;
         this.console = options.console;
         this.consoleError = options.consoleError;

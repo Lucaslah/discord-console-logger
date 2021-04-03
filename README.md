@@ -2,7 +2,7 @@
 <p>Discord Console Logger</p>
 </h1>
 <p align="center">
-  A Basic Nodejs logger that logs to a Discord Webhook
+  A Nodejs logger that logs to a Discord Webhook
   </p>
 <p align="center">
   <img alt="npm" src="https://img.shields.io/npm/v/discord-console-logger">
@@ -30,7 +30,7 @@ const logger = new DiscordConsoleLogger({
 // Full Discord Webhook URL with ID and Token (required)
     hookURL: '',
 // Icon to Show in the embed footer (optional)
-    icon: '', 
+    iconURL: '', 
 // Footer Text to show on the embed (optional)
     footer: '', 
 // Sets if you want discord-console-logger to log to the console as well as your Discord Webhook (optional: default false)
@@ -83,7 +83,7 @@ logger.info({
 | Field        | Type    | Description                                                                                   | Required | Default |
 |--------------|---------|-----------------------------------------------------------------------------------------------|----------|---------|
 | hookURL      | string  | Full Discord Webhook URL with ID and Token                                                    | true     | null    |
-| icon         | string  | Icon to Show in the embed footer                                                              | false    | null    |
+| iconURL         | string  | Icon to Show in the embed footer                                                              | false    | null    |
 | footer       | string  | Footer Text to show on the embed                                                              | false    | null    |
 | console      | boolean | Sets if you want discord-console-logger to log to the console as well as your Discord Webhook | false    | false   |
 | errorHandler | error   | Error Handler                                                                                 | false    | null    |

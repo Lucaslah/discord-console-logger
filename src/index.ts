@@ -1,13 +1,13 @@
 import request from "superagent"
 import { info, debug, warn, error, verbose } from "./color"
 
-const COLORS: { [key: string]: number } = {
+const COLORS: { [ key: string ]: number } = {
 
-    error: 14362664,
-    warn: 16497928,
-    info: 2196944,
-    verbose: 6559689,
-    debug: 47694
+  error: 14362664,
+  warn: 16497928,
+  info: 2196944,
+  verbose: 6559689,
+  debug: 47694
 
 }
 
@@ -26,7 +26,7 @@ interface LogMsg {
 
 interface LogOptions {
     hookURL: string
-    icon?: string
+    iconURL?: string
     footer?: string
     console?: boolean
     consoleError?: boolean
@@ -43,13 +43,13 @@ export class DiscordConsoleLogger {
     private consoleError: boolean | undefined = false
     private onErrorCallback: ErrorCallback | undefined = undefined;
 
-     /**
+   /**
    * @param options Discord logger options
    */
 
   constructor(options: LogOptions) {
     this.hook = options.hookURL;
-    this.icon = options.icon;
+    this.icon = options.iconURL;
     this.footer = options.footer;
     this.console = options.console;
     this.consoleError = options.consoleError
@@ -90,7 +90,7 @@ export class DiscordConsoleLogger {
   }
 
   /**
-   * @param level Message log level
+   * @param level Log Level
    * @param data Log message data
    */
   public log = async (
@@ -100,14 +100,41 @@ export class DiscordConsoleLogger {
     try {
       const postBody = {
         content: undefined as string | undefined,
+        /**
+         * Embed Data
+         */
         embeds: [{
+         /**
+         * Embed Title
+         */
           title: data.message,
+         /**
+         * Embed description
+         */
           description: data.description,
+         /**
+         * Embed Color
+         */
           color: COLORS[level],
+         /**
+         * Embed fields
+         */
           fields: [] as any[],
+         /**
+         * Embed Timestamp
+         */
           timestamp: new Date().toISOString(),
+         /**
+         * Embed footer
+         */
           footer: {
+         /**
+         * Embed footer text
+         */
             text: this.footer,
+         /**
+         * Embed footer Icon
+         */
             icon_url: this.icon
           }
         }]
