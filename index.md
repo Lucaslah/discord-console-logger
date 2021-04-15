@@ -1,7 +1,4 @@
 <p align="center">
-  A Nodejs logger that logs to a Discord Webhook
-  </p>
-<p align="center">
   <img alt="npm" src="https://img.shields.io/npm/v/discord-console-logger">
   <img alt="GitHub issues" src="https://img.shields.io/github/issues/lucaslah/discord-console-logger">
   <img alt="NPM" src="https://img.shields.io/npm/l/discord-console-logger">
