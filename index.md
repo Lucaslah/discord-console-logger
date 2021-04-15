@@ -1,37 +1,86 @@
-## Welcome to GitHub Pages
+<p align="center">
+  A Nodejs logger that logs to a Discord Webhook
+  </p>
+<p align="center">
+  <img alt="npm" src="https://img.shields.io/npm/v/discord-console-logger">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/lucaslah/discord-console-logger">
+  <img alt="NPM" src="https://img.shields.io/npm/l/discord-console-logger">
+  <img alt="npm" src="https://img.shields.io/npm/dw/discord-console-logger">
+  </p>
+  <p align="center">
+  <img alt="npmpkg" src="https://nodei.co/npm/discord-console-logger.png" herf="https://npmjs.org/package/discord-console-logger">
+  </p>
 
-You can use the [editor on GitHub](https://github.com/Lucaslah/discord-console-logger/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## Install
+- yarn: `yarn add discord-console-logger`
+- npm: `npm i discord-console-logger`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Usage
+```javascript
+// Import Discord Console Logger
+const { DiscordConsoleLogger } = require('discord-console-logger')
 
-```markdown
-Syntax highlighted code block
+// Make a new Logger instance
+const logger = new DiscordConsoleLogger({ 
+// Full Discord Webhook URL with ID and Token (required)
+    hookURL: '',
+// Icon to Show in the embed footer (optional)
+    iconURL: '', 
+// Footer Text to show on the embed (optional)
+    footer: '', 
+// Sets if you want discord-console-logger to log to the console as well as your Discord Webhook (optional: default false)
+    console: true, 
+// Error Handler (optional)
+    errorHandler: err => {
+        console.error('[DISCORD CONSOLE LOGGER]', err); 
+    }
+})
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Examples
+```javascript
+logger.warn({ message: "Testing" }) // Log Warn
+logger.error({ message: "Testing" }) // Log Error
+logger.info({ message: "Testing" }) // Log Info
+logger.verbose({ message: "Testing" }) // Log Verbose
+logger.debug({ message: "Testing" }) // Log Debug
 
-### Jekyll Themes
+// Log Error
+logger.error({
+  message: 'Testing',
+  error: new Error('Testing')
+})
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Lucaslah/discord-console-logger/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+// Log Json
+logger.debug({
+  message: 'Testing',
+  json: { test: testing }
+})
 
-### Support or Contact
+// Log with a Description
+logger.info({
+  message: 'Testing',
+  description: 'More Testing'
+})
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Log Message Data
+| Field  | Type  | Description  | Required |
+|---|---|---|---|
+| message  | string  | Main log message (Embed Title)   |  yes  |
+| description  |  string  | Log message description (Embed description)  | no  |
+| error  |  Error  | Error to be logged with the log embed  | no  |
+| json  |  any | Json that will be logged with the Discord Embed  | no  |
+---
+
+## Logger Instance Data
+| Field        | Type    | Description                                                                                   | Required | Default |
+|--------------|---------|-----------------------------------------------------------------------------------------------|----------|---------|
+| hookURL      | string  | Full Discord Webhook URL with ID and Token                                                    | true     | null    |
+| iconURL         | string  | Icon to Show in the embed footer                                                              | false    | null    |
+| footer       | string  | Footer Text to show on the embed                                                              | false    | null    |
+| console      | boolean | Sets if you want discord-console-logger to log to the console as well as your Discord Webhook | false    | false   |
+| errorHandler | error   | Error Handler                                                                                 | false    | null    |
