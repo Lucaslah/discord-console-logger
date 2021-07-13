@@ -43,8 +43,8 @@ export class DiscordConsoleLogger {
     /**
      * Discord Console Logger
      * @param options Discord logger options
+     * @author lucaslah
      */
-
     constructor(options: LogOptions) {
         this.hook = options.hookURL;
         this.icon = options.iconURL;
@@ -193,6 +193,8 @@ export class DiscordConsoleLogger {
      * Log error
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.error({ message: "Hello", error: new Error("Test Error") })
+     * @public
      */
     public error = async (data: LogMsg): Promise < void > => {
         this.log('error', data);
@@ -208,6 +210,8 @@ export class DiscordConsoleLogger {
      * Log warn
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.warn({ message: "Hello" })
+     * @public
      */
     public warn = async (data: LogMsg): Promise < void > => {
         this.log('warn', data);
@@ -220,6 +224,8 @@ export class DiscordConsoleLogger {
      * Log info
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.info({ message: "Hello" })
+     * @public
      */
     public info = async (data: LogMsg): Promise < void > => {
         this.log('info', data);
@@ -232,6 +238,8 @@ export class DiscordConsoleLogger {
      * Log verbose
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.verbose({ message: "Hello" })
+     * @public
      */
     public verbose = async (data: LogMsg): Promise < void > => {
         this.log('verbose', data);
@@ -244,6 +252,8 @@ export class DiscordConsoleLogger {
      * Log debug
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.debug({ message: "Hello" })
+     * @public
      */
     public debug = async (data: LogMsg): Promise < void > => {
         this.log("debug", data);
@@ -257,6 +267,7 @@ export class DiscordConsoleLogger {
      * @param data 
      * @param customData 
      * @type {Promise<void>}
+     * @public
      */
     public custom = async (data: LogMsg, customData: CustomLog): Promise < void > => {
         this.log("custom", data, customData);
