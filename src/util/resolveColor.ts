@@ -1,4 +1,4 @@
-import * as Colors from "chalk";
+import Colors from "chalk";
 
 export const resolveColor = (color: any) => {
     if (typeof color === 'string') {
