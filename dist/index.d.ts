@@ -1,20 +1,5 @@
-declare type Log_Levels = 'error' | 'warn' | 'info' | 'verbose' | 'debug';
-interface LogMsg {
-    message: string;
-    description?: string;
-    error?: Error;
-    json?: any;
-}
-interface LogOptions {
-    hookURL: string;
-    iconURL?: string;
-    footer?: string;
-    console?: boolean;
-    consoleError?: boolean;
-    errorHandler?: {
-        (err: Error): void;
-    };
-}
+import { LogMsg, CustomLog, LogOptions } from "./interfaces";
+declare type Log_Levels = "error" | "warn" | "info" | "verbose" | "debug" | "custom";
 export declare class DiscordConsoleLogger {
     private hook;
     private icon;
@@ -25,8 +10,11 @@ export declare class DiscordConsoleLogger {
     private consoleError;
     private onErrorCallback;
     /**
-    * @param options Discord logger options
-    */
+     * Discord Console Logger
+     * @param options Discord logger options
+     * @author lucaslah
+     * @license MIT
+     */
     constructor(options: LogOptions);
     private logInternalError;
     private getToken;
@@ -35,26 +23,54 @@ export declare class DiscordConsoleLogger {
      * @param level Log Level
      * @param data Log message data
      */
-    log: (level: Log_Levels, data: LogMsg) => Promise<void>;
+    log: (level: Log_Levels, data: LogMsg, customData?: CustomLog) => Promise<void>;
     /**
-     * @param data Log message data
+     * Log error
+     * @param data
+     * @type {Promise<void>}
+     * @example <logger>.error({ message: "Hello", error: new Error("Test Error") })
+     * @public
      */
     error: (data: LogMsg) => Promise<void>;
     /**
-     * @param data Log message data
+     * Log warn
+     * @param data
+     * @type {Promise<void>}
+     * @example <logger>.warn({ message: "Hello" })
+     * @public
      */
     warn: (data: LogMsg) => Promise<void>;
     /**
-     * @param data Log message data
+     * Log info
+     * @param data
+     * @type {Promise<void>}
+     * @example <logger>.info({ message: "Hello" })
+     * @public
      */
     info: (data: LogMsg) => Promise<void>;
     /**
-     * @param data Log message data
+     * Log verbose
+     * @param data
+     * @type {Promise<void>}
+     * @example <logger>.verbose({ message: "Hello" })
+     * @public
      */
     verbose: (data: LogMsg) => Promise<void>;
     /**
-     * @param data Log message data
+     * Log debug
+     * @param data
+     * @type {Promise<void>}
+     * @example <logger>.debug({ message: "Hello" })
+     * @public
      */
     debug: (data: LogMsg) => Promise<void>;
+    /**
+     * Log Custom
+     * @param data
+     * @param customData
+     * @type {Promise<void>}
+     * @public
+     */
+    custom: (data: LogMsg, customData: CustomLog) => Promise<void>;
 }
 export {};
