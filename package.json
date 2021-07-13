@@ -3,7 +3,7 @@
     "version": "1.1.0",
     "main": "dist/index.js",
     "repository": "https://github.com/Lucaslah/discord-console-logger.git",
-    "author": "Lucaslah <lucas.petrino@spycampllc.ml>",
+    "author": "lucaslah",
     "license": "MIT",
     "scripts": {
         "start": "ts-node src/index.ts",

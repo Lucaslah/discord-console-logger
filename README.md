@@ -45,11 +45,12 @@ const logger = new DiscordConsoleLogger({
 
 ## Examples
 ```javascript
-logger.warn({ message: "Testing" }) // Log Warn
-logger.error({ message: "Testing" }) // Log Error
-logger.info({ message: "Testing" }) // Log Info
-logger.verbose({ message: "Testing" }) // Log Verbose
-logger.debug({ message: "Testing" }) // Log Debug
+logger.warn({ message: "Testing" }); // Log Warn
+logger.error({ message: "Testing" }); // Log Error
+logger.info({ message: "Testing" }); // Log Info
+logger.verbose({ message: "Testing" }); // Log Verbose
+logger.debug({ message: "Testing" }); // Log Debug
+logger.custom({ message: "Testing" }, { color: 0x3498db, prefix: "CUSTOM" });
 
 // Log Error
 logger.error({
@@ -87,3 +88,9 @@ logger.info({
 | footer       | string  | Footer Text to show on the embed                                                              | false    | null    |
 | console      | boolean | Sets if you want discord-console-logger to log to the console as well as your Discord Webhook | false    | false   |
 | errorHandler | error   | Error Handler                                                                                 | false    | null    |
+
+# Custom Log Data
+| Field  | Type          | Description                                  | Required | Default |
+|--------|---------------|----------------------------------------------|----------|---------|
+| prefix | string        | Prefix to show on the console log if enabled | false    | CUSTOM  |
+| color  | number/string | Color to show on the Webhook                 | false    | black   |
