@@ -12,6 +12,7 @@ export declare class DiscordConsoleLogger {
     /**
      * Discord Console Logger
      * @param options Discord logger options
+     * @author lucaslah
      */
     constructor(options: LogOptions);
     private logInternalError;
@@ -26,30 +27,40 @@ export declare class DiscordConsoleLogger {
      * Log error
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.error({ message: "Hello", error: new Error("Test Error") })
+     * @public
      */
     error: (data: LogMsg) => Promise<void>;
     /**
      * Log warn
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.warn({ message: "Hello" })
+     * @public
      */
     warn: (data: LogMsg) => Promise<void>;
     /**
      * Log info
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.info({ message: "Hello" })
+     * @public
      */
     info: (data: LogMsg) => Promise<void>;
     /**
      * Log verbose
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.verbose({ message: "Hello" })
+     * @public
      */
     verbose: (data: LogMsg) => Promise<void>;
     /**
      * Log debug
      * @param data
      * @type {Promise<void>}
+     * @example <logger>.debug({ message: "Hello" })
+     * @public
      */
     debug: (data: LogMsg) => Promise<void>;
     /**
@@ -57,6 +68,7 @@ export declare class DiscordConsoleLogger {
      * @param data
      * @param customData
      * @type {Promise<void>}
+     * @public
      */
     custom: (data: LogMsg, customData: CustomLog) => Promise<void>;
 }

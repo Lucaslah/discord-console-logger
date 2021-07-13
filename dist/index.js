@@ -18,6 +18,7 @@ class DiscordConsoleLogger {
     /**
      * Discord Console Logger
      * @param options Discord logger options
+     * @author lucaslah
      */
     constructor(options) {
         this.icon = undefined;
@@ -147,6 +148,8 @@ class DiscordConsoleLogger {
          * Log error
          * @param data
          * @type {Promise<void>}
+         * @example <logger>.error({ message: "Hello", error: new Error("Test Error") })
+         * @public
          */
         this.error = async (data) => {
             this.log('error', data);
@@ -161,6 +164,8 @@ class DiscordConsoleLogger {
          * Log warn
          * @param data
          * @type {Promise<void>}
+         * @example <logger>.warn({ message: "Hello" })
+         * @public
          */
         this.warn = async (data) => {
             this.log('warn', data);
@@ -172,6 +177,8 @@ class DiscordConsoleLogger {
          * Log info
          * @param data
          * @type {Promise<void>}
+         * @example <logger>.info({ message: "Hello" })
+         * @public
          */
         this.info = async (data) => {
             this.log('info', data);
@@ -183,6 +190,8 @@ class DiscordConsoleLogger {
          * Log verbose
          * @param data
          * @type {Promise<void>}
+         * @example <logger>.verbose({ message: "Hello" })
+         * @public
          */
         this.verbose = async (data) => {
             this.log('verbose', data);
@@ -194,6 +203,8 @@ class DiscordConsoleLogger {
          * Log debug
          * @param data
          * @type {Promise<void>}
+         * @example <logger>.debug({ message: "Hello" })
+         * @public
          */
         this.debug = async (data) => {
             this.log("debug", data);
@@ -206,6 +217,7 @@ class DiscordConsoleLogger {
          * @param data
          * @param customData
          * @type {Promise<void>}
+         * @public
          */
         this.custom = async (data, customData) => {
             this.log("custom", data, customData);
