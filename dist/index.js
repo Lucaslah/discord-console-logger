@@ -19,6 +19,7 @@ class DiscordConsoleLogger {
      * Discord Console Logger
      * @param options Discord logger options
      * @author lucaslah
+     * @license MIT
      */
     constructor(options) {
         this.icon = undefined;
