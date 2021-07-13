@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -37,10 +46,10 @@ class DiscordConsoleLogger {
                 console.error(err);
             }
         };
-        this.getToken = async () => {
+        this.getToken = () => __awaiter(this, void 0, void 0, function* () {
             if (!this.id || !this.token) {
                 try {
-                    const response = await superagent_1.default
+                    const response = yield superagent_1.default
                         .get(this.hook)
                         .set('accept', 'json');
                     this.id = response.body.id;
@@ -54,16 +63,16 @@ class DiscordConsoleLogger {
                 id: this.id || '',
                 token: this.token || ''
             };
-        };
-        this.getUrl = async () => {
-            const { id, token } = await this.getToken();
+        });
+        this.getUrl = () => __awaiter(this, void 0, void 0, function* () {
+            const { id, token } = yield this.getToken();
             return `https://discord.com/api/webhooks/${id}/${token}`;
-        };
+        });
         /**
          * @param level Log Level
          * @param data Log message data
          */
-        this.log = async (level, data, customData) => {
+        this.log = (level, data, customData) => __awaiter(this, void 0, void 0, function* () {
             try {
                 if (level === "custom" && customData) {
                     const customLogger = new customLogger_1.default({
@@ -78,7 +87,7 @@ class DiscordConsoleLogger {
                     };
                     customLogger.sendDiscordData({
                         send: true
-                    }, data, cd, await this.getUrl());
+                    }, data, cd, yield this.getUrl());
                     return;
                 }
                 const postBody = {
@@ -133,10 +142,10 @@ class DiscordConsoleLogger {
                     postBody.content = `\`\`\`${contentStrings.join('\n\n')}\`\`\``;
                 }
                 const options = {
-                    url: await this.getUrl(),
+                    url: yield this.getUrl(),
                     body: postBody
                 };
-                await superagent_1.default
+                yield superagent_1.default
                     .post(options.url)
                     .send(options.body)
                     .set('accept', 'json');
@@ -144,7 +153,7 @@ class DiscordConsoleLogger {
             catch (err) {
                 this.logInternalError(err);
             }
-        };
+        });
         /**
          * Log error
          * @param data
@@ -152,7 +161,7 @@ class DiscordConsoleLogger {
          * @example <logger>.error({ message: "Hello", error: new Error("Test Error") })
          * @public
          */
-        this.error = async (data) => {
+        this.error = (data) => __awaiter(this, void 0, void 0, function* () {
             this.log('error', data);
             if (this.console) {
                 console_levels_1.error(data.message);
@@ -160,7 +169,7 @@ class DiscordConsoleLogger {
                     console.error(data.error);
                 }
             }
-        };
+        });
         /**
          * Log warn
          * @param data
@@ -168,12 +177,12 @@ class DiscordConsoleLogger {
          * @example <logger>.warn({ message: "Hello" })
          * @public
          */
-        this.warn = async (data) => {
+        this.warn = (data) => __awaiter(this, void 0, void 0, function* () {
             this.log('warn', data);
             if (this.console) {
                 console_levels_1.warn(data.message);
             }
-        };
+        });
         /**
          * Log info
          * @param data
@@ -181,12 +190,12 @@ class DiscordConsoleLogger {
          * @example <logger>.info({ message: "Hello" })
          * @public
          */
-        this.info = async (data) => {
+        this.info = (data) => __awaiter(this, void 0, void 0, function* () {
             this.log('info', data);
             if (this.console) {
                 console_levels_1.info(data.message);
             }
-        };
+        });
         /**
          * Log verbose
          * @param data
@@ -194,12 +203,12 @@ class DiscordConsoleLogger {
          * @example <logger>.verbose({ message: "Hello" })
          * @public
          */
-        this.verbose = async (data) => {
+        this.verbose = (data) => __awaiter(this, void 0, void 0, function* () {
             this.log('verbose', data);
             if (this.console) {
                 console_levels_1.verbose(data.message);
             }
-        };
+        });
         /**
          * Log debug
          * @param data
@@ -207,12 +216,12 @@ class DiscordConsoleLogger {
          * @example <logger>.debug({ message: "Hello" })
          * @public
          */
-        this.debug = async (data) => {
+        this.debug = (data) => __awaiter(this, void 0, void 0, function* () {
             this.log("debug", data);
             if (this.console) {
                 console_levels_1.debug(data.message);
             }
-        };
+        });
         /**
          * Log Custom
          * @param data
@@ -220,14 +229,14 @@ class DiscordConsoleLogger {
          * @type {Promise<void>}
          * @public
          */
-        this.custom = async (data, customData) => {
+        this.custom = (data, customData) => __awaiter(this, void 0, void 0, function* () {
             this.log("custom", data, customData);
             if (this.console) {
                 const _color_ = resolveColor_1.resolveColor(customData.color);
                 const prefix = customData.prefix;
                 console_levels_1.custom(data.message, prefix);
             }
-        };
+        });
         this.hook = options.hookURL;
         this.icon = options.iconURL;
         this.footer = options.footer;
